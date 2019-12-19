@@ -1,0 +1,19 @@
+# Write your MySQL query statement below
+select C.department, D.Name Employee, D.Salary
+from Employee D, ( 
+select B.Name department, MAX(A.Salary) max_salary, B.Id Department_id
+from employee A
+inner join Department B on A.DepartmentId = B.Id 
+group by DepartmentId) C
+where D.Salary = C.max_salary and D.DepartmentId =C.Department_id # 816 ms
+
+
+# SELECT D.Name AS Department ,E.Name AS Employee ,E.Salary 
+# FROM
+# 	Employee E,
+# 	(SELECT DepartmentId,max(Salary) as max FROM Employee GROUP BY DepartmentId) T,
+# 	Department D
+# WHERE E.DepartmentId = T.DepartmentId 
+#   AND E.Salary = T.max
+#   AND E.DepartmentId = D.id # 774 ms
+   
