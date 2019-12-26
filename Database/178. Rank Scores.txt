@@ -1,0 +1,10 @@
+# Write your MySQL query statement below
+select scores.score, rank_map.rank
+from (SELECT 
+    (@row_number:=@row_number + 1) AS rank,  s.Score 
+FROM
+    (select distinct Score from scores) as s ,(SELECT @row_number:=0) AS t
+order by s.score desc) rank_map
+inner join scores on scores.score = rank_map.Score
+order by scores.score desc
+
