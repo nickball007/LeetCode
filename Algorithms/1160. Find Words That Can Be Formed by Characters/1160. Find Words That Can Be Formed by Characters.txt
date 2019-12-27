@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int countCharacters(vector<string>& words, string chars) {
+        vector<int> alphabat_counter(26);
+        bool no_words_match_checker = true;
+        int ans = 0;
+        for(auto ch : chars) ++alphabat_counter[ch - 'a'];
+        for(auto wd : words){
+            vector<int> alphabat_counter_re = alphabat_counter;
+            bool no_words_match_checker = true;
+            for(auto ch_wd : wd){
+                if( --alphabat_counter_re[ch_wd - 'a'] < 0){
+                    no_words_match_checker = false;
+                    break;
+                    }
+                }
+            if(no_words_match_checker)
+                ans += wd.size();
+            }
+        return ans;
+    }
+};
